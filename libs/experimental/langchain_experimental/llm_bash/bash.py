@@ -92,7 +92,8 @@ class BashProcess:
         """
         pexpect = self._lazy_import_pexpect()
         process = pexpect.spawn(
-            "env", ["-i", "bash", "--norc", "--noprofile"], encoding="utf-8"
+            #"env", ["-i", "bash", "--norc", "--noprofile"], encoding="utf-8"
+            "env", ["-i", "zsh", "--login"], encoding="utf-8"
         )
         # Set the custom prompt
         process.sendline("PS1=" + prompt)
@@ -169,11 +170,11 @@ class BashProcess:
         self.process.sendline(command)
 
         # Clear the output with an empty string
-        self.process.expect(self.prompt, timeout=10)
+        self.process.expect(self.prompt, timeout=60)
         self.process.sendline("")
 
         try:
-            self.process.expect([self.prompt, pexpect.EOF], timeout=10)
+            self.process.expect([self.prompt, pexpect.EOF], timeout=60)
         except pexpect.TIMEOUT:
             return f"Timeout error while executing command {command}"
         if self.process.after == pexpect.EOF:

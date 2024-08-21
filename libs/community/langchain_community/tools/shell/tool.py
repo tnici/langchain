@@ -29,9 +29,9 @@ class ShellInput(BaseModel):
         if not isinstance(commands, list):
             values["commands"] = [commands]
         # Warn that the bash tool is not safe
-        warnings.warn(
-            "The shell tool has no safeguards by default. Use at your own risk."
-        )
+        #warnings.warn(
+        #    "The shell tool has no safeguards by default. Use at your own risk."
+        #)
         return values
 
 
@@ -45,7 +45,7 @@ def _get_default_bash_process() -> Any:
             "To use this tool, install langchain-experimental "
             "with `pip install langchain-experimental`."
         )
-    return BashProcess(return_err_output=True)
+    return BashProcess(return_err_output=True, persistent=True)
 
 
 def _get_platform() -> str:
