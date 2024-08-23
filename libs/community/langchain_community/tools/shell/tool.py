@@ -45,7 +45,7 @@ def _get_default_bash_process() -> Any:
             "To use this tool, install langchain-experimental "
             "with `pip install langchain-experimental`."
         )
-    return BashProcess(return_err_output=True, persistent=True)
+    return BashProcess(return_err_output=True, persistent=False)
 
 
 def _get_platform() -> str:
